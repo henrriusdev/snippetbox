@@ -4,10 +4,10 @@ import (
 	"database/sql"
 	"flag"
 	_ "github.com/go-sql-driver/mysql"
+	"hengeek/snippetbox/internal/models"
 	"log"
 	"net/http"
 	"os"
-	"hengeek/snippetbox/internal/models"
 )
 
 type application struct {
@@ -15,8 +15,6 @@ type application struct {
 	infoLog  *log.Logger
 	snippets *models.SnippetModel
 }
-
-
 
 func main() {
 
@@ -38,7 +36,7 @@ func main() {
 	app := &application{
 		errorLog: errorLog,
 		infoLog:  infoLog,
-		snippets: &models.SnippetModel{DB: db}
+		snippets: &models.SnippetModel{db},
 	}
 
 	srv := &http.Server{

@@ -3,6 +3,7 @@ package models
 import (
 	"database/sql"
 	"errors"
+	"fmt"
 	"time"
 )
 
@@ -49,7 +50,7 @@ func (m *SnippetModel) Get(id int) (*Snippet, error) {
 }
 
 func (m *SnippetModel) Latest() ([]*Snippet, error) {
-	stmt := "SELECT * FROM snippets WHERE expires = UTC_TIMESTAMP() ORDER BY id DESC LIMIT 10"
+	stmt := "SELECT * FROM snippets WHERE expires > UTC_TIMESTAMP() ORDER BY id DESC LIMIT 10"
 
 	rows, err := m.DB.Query(stmt)
 	if err != nil {
@@ -70,5 +71,6 @@ func (m *SnippetModel) Latest() ([]*Snippet, error) {
 	if err = rows.Err(); err != nil {
 		return nil, err
 	}
+	fmt.Println(snippets)
 	return snippets, nil
 }

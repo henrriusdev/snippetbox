@@ -1,4 +1,4 @@
-module hengeek/snippetbox
+module github.com/hbourgeot/snippetbox
 
 go 1.18
 

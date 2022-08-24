@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"flag"
 	_ "github.com/go-sql-driver/mysql"
-	"hengeek/snippetbox/internal/models"
+	"github.com/hbourgeot/snippetbox/internal/models"
 	"log"
 	"net/http"
 	"os"
@@ -20,7 +20,7 @@ func main() {
 
 	addr := flag.String("addr", ":4000", "HTTP network address")
 
-	dsn := flag.String("dsn", "web:Reyshell@/snippetbox?parseTime=true", "MySQL data source name")
+	dsn := flag.String("dsn", "henrry:reyshell@/snippetbox?parseTime=true", "MySQL data source name")
 
 	flag.Parse()
 

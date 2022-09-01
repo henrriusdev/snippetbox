@@ -3,7 +3,6 @@ package models
 import (
 	"database/sql"
 	"errors"
-	"fmt"
 	"time"
 )
 
@@ -71,6 +70,5 @@ func (m *SnippetModel) Latest() ([]*Snippet, error) {
 	if err = rows.Err(); err != nil {
 		return nil, err
 	}
-	fmt.Println(snippets)
 	return snippets, nil
 }

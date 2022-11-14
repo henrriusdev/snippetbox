@@ -104,7 +104,7 @@ func (app *application) snippetCreatePost(w http.ResponseWriter, r *http.Request
 	if len(form.FieldErrors) > 0 {
 		data := app.newTemplateData(r)
 		data.Form = form
-		app.render(w, http.StatusUnprocessableEntity, "create.tmpl", data)
+		app.render(w, http.StatusUnprocessableEntity, "create.gohtml", data)
 		return
 	}
 

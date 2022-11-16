@@ -11,6 +11,7 @@ import (
 	"github.com/hbourgeot/snippetbox/internal/models"
 )
 
+// struct for create.gohtml form
 type snippetCreateForm struct {
 	Title               string `form:"title"`
 	Content             string `form:"content"`
@@ -18,6 +19,14 @@ type snippetCreateForm struct {
 	validator.Validator `form:"-"`
 }
 
+type userSignupForm struct {
+	Name                string `form:"name"`
+	Email               string `form:"email"`
+	Password            string `form:"password"`
+	validator.Validator `form:"-"`
+}
+
+// Home handler
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	snippets, err := app.snippets.Latest()
 	if err != nil {
@@ -31,6 +40,7 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	app.render(w, http.StatusOK, "home.gohtml", data)
 }
 
+// view.gohtml handler
 func (app *application) snippetView(w http.ResponseWriter, r *http.Request) {
 	params := httprouter.ParamsFromContext(r.Context())
 
@@ -56,6 +66,7 @@ func (app *application) snippetView(w http.ResponseWriter, r *http.Request) {
 	app.render(w, http.StatusOK, "view.gohtml", data)
 }
 
+// create.gohtml handler
 func (app *application) snippetCreate(w http.ResponseWriter, r *http.Request) {
 	data := app.newTemplateData(r)
 
@@ -66,6 +77,7 @@ func (app *application) snippetCreate(w http.ResponseWriter, r *http.Request) {
 	app.render(w, http.StatusOK, "create.gohtml", data)
 }
 
+// validate form values of create.gohtml
 func (app *application) snippetCreatePost(w http.ResponseWriter, r *http.Request) {
 	var form snippetCreateForm
 
@@ -103,7 +115,9 @@ func (app *application) snippetCreatePost(w http.ResponseWriter, r *http.Request
 // Functions for handing user routes
 
 func (app *application) userSignup(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Display a HTML form for signing up a new user...")
+	data := app.newTemplateData(r)
+	data.Form = userSignupForm{}
+	app.render(w, http.StatusOK, "signup.gohtml", data)
 }
 
 func (app *application) userSignupPost(w http.ResponseWriter, r *http.Request) {

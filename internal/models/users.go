@@ -27,7 +27,7 @@ func (m *UserModel) Insert(name, email, password string) error {
 		return err
 	}
 
-	query := "INSERT INTO USERS (name, email, hashed_password, created) VALUES(?,?,?, UTC_TIMESTAMP())"
+	query := "INSERT INTO users (name, email, hashed_password, created) VALUES(?,?,?, UTC_TIMESTAMP())"
 
 	_, err = m.DB.Exec(query, name, email, string(hashedPassword))
 	if err != nil {

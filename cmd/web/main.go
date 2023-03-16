@@ -4,13 +4,14 @@ import (
 	"crypto/tls"
 	"database/sql"
 	"flag"
-	"github.com/alexedwards/scs/mysqlstore"
-	"github.com/alexedwards/scs/v2"
 	"html/template"
 	"log"
 	"net/http"
 	"os"
 	"time"
+
+	"github.com/alexedwards/scs/mysqlstore"
+	"github.com/alexedwards/scs/v2"
 
 	"github.com/go-playground/form/v4"
 	_ "github.com/go-sql-driver/mysql"
